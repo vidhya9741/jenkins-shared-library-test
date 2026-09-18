@@ -1,3 +1,5 @@
+@Library('shared-library@main') _
+
 pipeline {
     agent any
 
@@ -17,15 +19,21 @@ pipeline {
             }
         }
 
+        stage('Build Application') {
+            steps {
+                buildApp()
+            }
+        }
+
     }
 
     post {
         success {
-            echo "Unit tests passed successfully!"
+            echo "Pipeline completed successfully!"
         }
 
         failure {
-            echo "Unit tests failed!"
+            echo "Pipeline failed!"
         }
     }
 }
